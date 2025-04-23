@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoriMinas - Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <h2 class="fw-bold text-primary">HoriMinas</h2>
+                            <p class="text-muted">Sistema de Gestão de Rendimentos</p>
+                        </div>
+                        
+                        <div id="login-alert" class="alert alert-danger d-none" role="alert">
+                            Documento ou senha incorretos.
+                        </div>
+                        
+                        <form id="login-form">
+                            <div class="mb-3">
+                                <label for="documento" class="form-label">CPF ou CNPJ</label>
+                                <input type="text" class="form-control" id="documento" name="documento" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="senha" name="senha" required>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <p class="text-muted small">
+                        &copy; 2025 HoriMinas - Todos os direitos reservados
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>
