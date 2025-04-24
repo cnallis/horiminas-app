@@ -10,7 +10,7 @@ dotenv.config();
 
 // Inicializa o aplicativo Express
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware para processar JSON
 app.use(express.json());
@@ -41,8 +41,8 @@ app.use((err, req, res, next) => {
 });
 
 // Inicia o servidor
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
 });
 
 module.exports = app;
