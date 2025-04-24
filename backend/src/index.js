@@ -6,5 +6,5 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`Servidor HoriMinas rodando na porta ${port}`);
-  console.log(`Acesse: http://localhost:${port}`);
+  
 });
