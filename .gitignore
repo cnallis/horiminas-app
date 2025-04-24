@@ -1,2 +1,15 @@
+# This file is used to set environment variables for the application.
+# It is recommended to use a .env file for local development and a different one for production.
+# Make sure to add this file to your .gitignore to prevent it from being pushed to version control.
+# Ignorar dependências.
 node_modules/
-
+# Ignorar variáveis de ambiente.
+.env
+# Ignorar arquivos de log.
+*.log
+# Ignorar arquivos de configuração do editor.
+.vscode/
+# Ignorar arquivos de configuração do sistema operacional.
+.DS_Store
+# Ignorar arquivos de configuração do sistema operacional.
+Thumbs.db   
