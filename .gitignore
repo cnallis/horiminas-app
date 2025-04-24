@@ -14,3 +14,4 @@ node_modules/
 # Ignorar arquivos de configuração do sistema operacional.
 Thumbs.db   
 .env
+backend/.env
