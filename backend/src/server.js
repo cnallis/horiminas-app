@@ -28,7 +28,7 @@ app.use('/api/rendimentos', rendimentosRoutes);
 
 // Rota raiz para verificar se a API está funcionando
 app.get('/', (req, res) => {
-  res.json({ message: 'Bem-vindo à API da HoroMinas!' });
+  res.json({ message: 'Bem-vindo à API da HoriMinas!' });
 });
 
 // Middleware para tratamento de erros

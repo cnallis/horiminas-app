@@ -1,8 +1,8 @@
 -- Criação do banco de dados
-CREATE DATABASE horominas;
+CREATE DATABASE horiminas;
 
 -- Conectar ao banco de dados
-\c horominas;
+\c horiminas;
 
 -- Criação da tabela de motoristas
 CREATE TABLE motoristas (
