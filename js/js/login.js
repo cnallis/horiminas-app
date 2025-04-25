@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Desabilitar o botão de login e mostrar indicador de carregamento
                 const submitButton = loginForm.querySelector('button[type="submit"]');
+                if (!submitButton) return; // evita erro se botão não for encontrado
                 const originalText = submitButton.textContent;
                 submitButton.disabled = true;
                 submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Entrando...';
