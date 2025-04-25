@@ -69,10 +69,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Desabilitar o botão de login e mostrar indicador de carregamento
                 const submitButton = loginForm.querySelector('button[type="submit"]');
-                if (!submitButton) return; // evita erro se botão não for encontrado
+                if (submitButton) {
                 const originalText = submitButton.textContent;
                 submitButton.disabled = true;
                 submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Entrando...';
+
+                // Após login...
+                const usuario = await login(documento, senha);
+                salvarUsuario(usuario);
+
+                if (usuario.is_admin) {
+                    window.location.href = 'pages/admin/dashboard.html';
+                } else {
+                    window.location.href = 'pages/motorista/dashboard.html';
+    }
+
+                // Só em caso de erro a gente restaura o botão
+} else {
+    console.warn('Botão de submit não encontrado');
+}
+
                 
                 const usuario = await login(documento, senha);
                 
@@ -89,11 +105,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Mostrar mensagem de erro
                 loginAlert.textContent = error.message || 'Documento ou senha incorretos.';
                 loginAlert.classList.remove('d-none');
-                
-                // Restaurar o botão de login
-                submitButton.disabled = false;
-                submitButton.textContent = originalText;
+            
+                // Restaurar o botão de login (com verificação de existência)
+                const submitButton = loginForm.querySelector('button[type="submit"]');
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Entrar';
+                }
             }
+            
         });
     }
     
