@@ -106,13 +106,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 loginAlert.textContent = error.message || 'Documento ou senha incorretos.';
                 loginAlert.classList.remove('d-none');
             
-                // Restaurar o botão de login (com verificação de existência)
+                // Restaurar o botão de login de forma segura
                 const submitButton = loginForm.querySelector('button[type="submit"]');
                 if (submitButton) {
                     submitButton.disabled = false;
                     submitButton.textContent = 'Entrar';
                 }
             }
+            
             
         });
     }
