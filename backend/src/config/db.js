@@ -8,6 +8,10 @@ const pool = new Pool({
   database: process.env.DB_NAME || 'horiminas',
   password: process.env.DB_PASSWORD || 'postgres',
   port: process.env.DB_PORT || 5432,
+  ssl: {
+    require: true,
+    rejectUnauthorized: false
+  }
 });
 
 // Teste de conexão
