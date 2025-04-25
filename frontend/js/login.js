@@ -1,5 +1,5 @@
 // Configuração da API
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://horiminas-backend.onrender.com/api';
 
 // Função para realizar o login
 async function login(documento, senha) {
@@ -60,13 +60,52 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const documento = document.getElementById('documento').value;
             const senha = document.getElementById('senha').value;
-            
+
+            // 👇 Define o botão fora do try/catch
+            const submitButton = loginForm.querySelector('button[type="submit"]');
+            let originalText = '';
+            if (submitButton) {
+                originalText = submitButton.textContent;
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Entrando...';
+            }
+
             try {
                 loginAlert.classList.add('d-none');
-                
+
+                const usuario = await login(documento, senha);
+
+                // Salvar dados do usuário
+                salvarUsuario(usuario);
+
+                // Redirecionar para a página apropriada
+                if (usuario.is_admin) {
+                    window.location.href = 'pages/admin/dashboard.html';
+                } else {
+                    window.location.href = 'pages/motorista/dashboard.html';
+                }
+
+            } catch (error) {
+                console.error('Erro no login:', error);
+
+                // Mostrar mensagem de erro
+                loginAlert.textContent = error.message || 'Documento ou senha incorretos.';
+                loginAlert.classList.remove('d-none');
+
+                // Restaurar botão de login
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                }
+            }
+        });
+    }
+});
+
+
                 // Desabilitar o botão de login e mostrar indicador de carregamento
                 const submitButton = loginForm.querySelector('button[type="submit"]');
                 const originalText = submitButton.textContent;
@@ -84,25 +123,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     window.location.href = 'pages/motorista/dashboard.html';
                 }
-            } catch (error) {
-                // Mostrar mensagem de erro
-                loginAlert.textContent = error.message || 'Documento ou senha incorretos.';
-                loginAlert.classList.remove('d-none');
-                
-                // Restaurar o botão de login
-                submitButton.disabled = false;
-                submitButton.textContent = originalText;
-            }
-        });
-    }
+            
+        ;
+    
     
     // Verificar se o usuário já está logado e redirecionar
-    const usuario = obterUsuario();
-    if (usuario && usuario.token && window.location.pathname.includes('index.html')) {
-        if (usuario.is_admin) {
+    const usuarioLogado = obterUsuario();
+    if (usuarioLogado && usuarioLogado.token && window.location.pathname.includes('index.html')) {
+        if (usuarioLogado.is_admin) {
             window.location.href = 'pages/admin/dashboard.html';
         } else {
             window.location.href = 'pages/motorista/dashboard.html';
         }
     }
-});
+;
