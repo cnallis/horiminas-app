@@ -60,7 +60,7 @@ npm install
 ```
 PORT=3000
 DB_USER=seu_usuario_postgres
-DB_HOST=localhost
+DB_HOST=https://horiminas-backend.onrender.com/api
 DB_NAME=horiminas
 DB_PASSWORD=sua_senha_postgres
 DB_PORT=5432
@@ -73,7 +73,7 @@ JWT_SECRET=chave_secreta_para_jwt
 npm start
 ```
 
-O servidor estará disponível em `'https://horiminas-backend.onrender.com/api'`.
+O servidor estará disponível em ''https://horiminas-backend.onrender.com/api'.
 
 ## Configuração do Frontend
 

@@ -1,4 +1,4 @@
-// Configuração da API
+// Configuração da API - correta
 const API_URL = 'https://horiminas-backend.onrender.com/api';
 
 // Função para realizar o login
@@ -60,40 +60,50 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const documento = document.getElementById('documento').value;
             const senha = document.getElementById('senha').value;
-            
-            try {
-                loginAlert.classList.add('d-none');
-                
-                // Desabilitar o botão de login e mostrar indicador de carregamento
-                const submitButton = loginForm.querySelector('button[type="submit"]');
-                if (submitButton) {
-                const originalText = submitButton.textContent;
+
+            // 👇 Define o botão fora do try/catch
+            const submitButton = loginForm.querySelector('button[type="submit"]');
+            let originalText = '';
+            if (submitButton) {
+                originalText = submitButton.textContent;
                 submitButton.disabled = true;
                 submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Entrando...';
+            }
 
-                // Após login...
+            try {
+                loginAlert.classList.add('d-none');
+
                 const usuario = await login(documento, senha);
-                salvarUsuario(usuario);
 
-                if (usuario.is_admin) {
-                window.location.href = 'pages/admin/dashboard.html';
-                } else {
-                window.location.href = 'pages/motorista/dashboard.html';
-    }
-
-    // Só em caso de erro a gente restaura o botão
-} else {
-    console.warn('Botão de submit não encontrado');
-}
-
-                
-                const usuario = await login(documento, senha);
-                
                 // Salvar dados do usuário
                 salvarUsuario(usuario);
+
+                // Redirecionar para a página apropriada
+                if (usuario.is_admin) {
+                    window.location.href = 'pages/admin/dashboard.html';
+                } else {
+                    window.location.href = 'pages/motorista/dashboard.html';
+                }
+
+            } catch (error) {
+                console.error('Erro no login:', error);
+
+                // Mostrar mensagem de erro
+                loginAlert.textContent = error.message || 'Documento ou senha incorretos.';
+                loginAlert.classList.remove('d-none');
+
+                // Restaurar botão de login
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                }
+            }
+        });
+    }
+});
                 
                 // Redirecionar para a página apropriada
                 if (usuario.is_admin) {
@@ -101,29 +111,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     window.location.href = 'pages/motorista/dashboard.html';
                 }
-            } catch (error) {
-                // Mostrar mensagem de erro
-                loginAlert.textContent = error.message || 'Documento ou senha incorretos.';
-                loginAlert.classList.remove('d-none');
             
-                // Restaurar o botão de login de forma segura
-                const submitButton = loginForm.querySelector('button[type="submit"]');
-                if (submitButton) {
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Entrar';
-                }
-            }
-            
-                    });
-    }
+        ;
+    
     
     // Verificar se o usuário já está logado e redirecionar
-    const usuario = obterUsuario();
-    if (usuario && usuario.token && window.location.pathname.includes('index.html')) {
-        if (usuario.is_admin) {
+    const usuarioLogado = obterUsuario();
+    if (usuarioLogado && usuarioLogado.token && window.location.pathname.includes('index.html')) {
+        if (usuarioLogado.is_admin) {
             window.location.href = 'pages/admin/dashboard.html';
         } else {
             window.location.href = 'pages/motorista/dashboard.html';
         }
     }
-});
+;
