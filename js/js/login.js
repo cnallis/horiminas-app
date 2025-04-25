@@ -1,5 +1,5 @@
 // Configuração da API
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://horiminas-backend.onrender.com/api';
 
 // Função para realizar o login
 async function login(documento, senha) {

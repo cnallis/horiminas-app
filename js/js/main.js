@@ -1,5 +1,5 @@
 // Funções utilitárias para a aplicação
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://horiminas-backend.onrender.com/api';
 
 // Função para obter o token do usuário
 function obterToken() {

@@ -73,7 +73,7 @@ JWT_SECRET=chave_secreta_para_jwt
 npm start
 ```
 
-O servidor estará disponível em `http://localhost:3000`.
+O servidor estará disponível em `'https://horiminas-backend.onrender.com/api'`.
 
 ## Configuração do Frontend
 
