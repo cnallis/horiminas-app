@@ -1,4 +1,4 @@
-// Configuração da API
+// Configuração da API - correta
 const API_URL = 'https://horiminas-backend.onrender.com/api';
 
 // Função para realizar o login
@@ -104,18 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-
-                // Desabilitar o botão de login e mostrar indicador de carregamento
-                const submitButton = loginForm.querySelector('button[type="submit"]');
-                const originalText = submitButton.textContent;
-                submitButton.disabled = true;
-                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Entrando...';
-                
-                const usuario = await login(documento, senha);
-                
-                // Salvar dados do usuário
-                salvarUsuario(usuario);
                 
                 // Redirecionar para a página apropriada
                 if (usuario.is_admin) {

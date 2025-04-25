@@ -1,4 +1,4 @@
-// Funções utilitárias para a aplicação
+// Funções utilitárias para a aplicação - correta.
 const API_URL = 'https://horiminas-backend.onrender.com/api';
 
 // Função para obter o token do usuário
@@ -70,8 +70,9 @@ async function apiRequest(endpoint, method = 'GET', body = null) {
         }
         
         return await response.json();
-    } catch (error) {
-        console.error(`Erro na requisição para ${endpoint}:`, error);
+    } 
+        catch (error) {
+            console.error(`Erro na requisição para ${endpoint}:`, error);
         throw error;
     }
 }
