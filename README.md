@@ -60,7 +60,7 @@ npm install
 ```
 PORT=3000
 DB_USER=seu_usuario_postgres
-DB_HOST=https://horiminas-backend.onrender.com/api
+DB_HOST=ep-xxxxx.us-east-2.aws.neon.tech
 DB_NAME=horiminas
 DB_PASSWORD=sua_senha_postgres
 DB_PORT=5432
