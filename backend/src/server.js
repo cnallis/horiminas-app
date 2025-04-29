@@ -19,7 +19,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Configuração do CORS para permitir requisições do frontend
-app.use(cors());
+const allowedOrigins = ['https://cnallis.github.io'];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 
 // Rotas da API
 app.use('/api/auth', authRoutes);
