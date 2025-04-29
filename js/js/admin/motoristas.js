@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Modo cadastro
             formTitulo.textContent = 'Novo Motorista';
             motoristaForm.reset();
-            motoristaId.value = '';
+            motoristaId.value = null;
             document.getElementById('senha-help').classList.add('d-none');
         }
         
