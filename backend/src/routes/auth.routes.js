@@ -27,6 +27,12 @@ router.post('/login', async (req, res) => {
     // Verificar senha
     const senhaValida = await bcrypt.compare(senha, usuario.senha);
     
+    console.log('Login recebido:', { documento, senha });
+    console.log('Usuário do banco:', usuario);
+    console.log('Senha do banco (hash):', usuario.senha);
+    console.log('Senha válida?', senhaValida);
+
+
     if (!senhaValida) {
       return res.status(401).json({ message: 'Credenciais inválidas' });
     }
