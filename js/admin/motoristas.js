@@ -78,27 +78,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         e.preventDefault();
         
         try {
-            const id = motoristaId.value;
-            const nome = motoristaNome.value;
-            const documento = motoristaDocumento.value;
-            const senha = motoristaSenha.value;
+            const id = motoristaId.value.trim();
+            const nome = motoristaNome.value.trim();
+            const documento = motoristaDocumento.value.trim();
+            const senha = motoristaSenha.value.trim();
             
-            const dadosMotorista = { nome, documento };
-            if (senha) {
-                dadosMotorista.senha = senha;
+            if (!nome || !documento) {
+                mostrarAlerta('Nome e Documento são obrigatórios.', 'danger');
+                return;
             }
+            
+            let dadosMotorista = { nome, documento };
             
             let response;
             
             if (id) {
                 // Atualizar motorista existente
+                if (senha) {
+                    dadosMotorista.senha = senha;
+                }
                 response = await apiRequest(`/motoristas/${id}`, 'PUT', dadosMotorista);
                 mostrarAlerta('Motorista atualizado com sucesso!', 'success');
             } else {
                 // Criar novo motorista
                 if (!senha) {
-                    return mostrarAlerta('A senha é obrigatória para novos motoristas.', 'danger');
+                    mostrarAlerta('A senha é obrigatória para cadastrar um novo motorista.', 'danger');
+                    return;
                 }
+                dadosMotorista.senha = senha;
                 response = await apiRequest('/motoristas', 'POST', dadosMotorista);
                 mostrarAlerta('Motorista cadastrado com sucesso!', 'success');
             }
@@ -110,6 +117,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             mostrarAlerta('Erro ao salvar motorista: ' + error.message, 'danger');
         }
     }
+    
 
     // Função para carregar a lista de motoristas
     async function carregarMotoristas() {
