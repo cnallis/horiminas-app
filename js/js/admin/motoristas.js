@@ -111,7 +111,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             
             ocultarFormulario();
+            motoristaId.value = ''; // <- força o modo de criação para o próximo uso
             await carregarMotoristas();
+
+            console.log('ID do motorista:', id);
+            
         } catch (error) {
             console.error('Erro ao salvar motorista:', error);
             mostrarAlerta('Erro ao salvar motorista: ' + error.message, 'danger');
